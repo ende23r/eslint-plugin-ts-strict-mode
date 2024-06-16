@@ -1,37 +1,29 @@
 {
-  "name": "eslint-plugin-strict-null-checks",
-  "version": "0.1.2",
+  "name": "eslint-plugin-ts-strict-mode",
+  "version": "0.1.0",
   "description": "Eslint plugin that aims to reproduce strictNullCheck from tsconfig for easier migration",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "vitest",
     "build": "tsc && cp src/index.js dist/ && cp package.json dist/",
-    "build:win": "pwsh.exe -Command \"npx tsc && copy src/index.js dist/index.js && copy package.json dist/package.json\"",
     "prepublishOnly": "yarn test && yarn build:win"
-  },
-  "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.13.0",
-    "@typescript-eslint/experimental-utils": "^5.13.0",
-    "@typescript-eslint/parser": "^5.13.0",
-    "requireindex": "^1.2.0"
-  },
-  "devDependencies": {
-    "@types/jest": "^27.0.2",
-    "eslint": "^8.10.0",
-    "jest": "^27.3.1",
-    "ts-jest": "^27.0.7",
-    "typescript": "4.5.5"
-  },
-  "peerDependencies": {
-    "typescript": ">=3.9.4"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JaroslawPokropinski/eslint-plugin-strict-null-check.git"
+    "url": "git+https://github.com/ende23r/eslint-plugin-ts-strict-mode.git"
   },
   "author": {
-    "name": "Jarosław Pokropiński",
-    "email": "jarek.pokropinski@gmail.com"
+    "name": "Eric Andow",
+    "email": "ericandow@gmail.com"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@typescript-eslint/parser": "^6.19.0",
+    "@typescript-eslint/utils": "^6.19.0",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "typescript-eslint": "^7.13.0"
+  }
 }
