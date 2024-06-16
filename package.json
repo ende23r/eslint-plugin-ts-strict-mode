@@ -3,8 +3,12 @@
   "version": "0.1.0",
   "description": "Eslint plugin that aims to reproduce strictNullCheck from tsconfig for easier migration",
   "main": "dist/index.js",
+  "files": ["dist"],
+  "type": "module",
   "scripts": {
+    "typecheck": "tsc --noEmit",
     "test": "vitest",
+    "clean": "rm -rf dist/*",
     "build": "tsc && cp src/index.js dist/ && cp package.json dist/",
     "prepublishOnly": "yarn test && yarn build:win"
   },
@@ -24,6 +28,7 @@
   },
   "devDependencies": {
     "eslint": "^8.57.0",
-    "typescript-eslint": "^7.13.0"
+    "typescript-eslint": "^7.13.0",
+    "vitest": "^1.6.0"
   }
 }

@@ -1,7 +1,7 @@
-import { ESLintUtils } from "@typescript-eslint/experimental-utils";
-import { createEslintRule } from "../utils/create-eslint-rule";
+import { ESLintUtils } from "@typescript-eslint/utils";
+import { createEslintRule } from "../utils/create-eslint-rule.js";
 import { DiagnosticCategory } from "typescript";
-import { posToLoc } from "../utils/pos-to-loc";
+import { posToLoc } from "../utils/pos-to-loc.js";
 
 export const RULE_NAME = "all";
 export type MessageIds = "typescriptError";
@@ -13,7 +13,11 @@ export default createEslintRule<Options, MessageIds>({
     type: "problem",
     docs: {
       description: "Enforce strict null checks",
-      recommended: "warn",
+      /*
+      recommended: {
+        
+      },
+      */
     },
     schema: [],
     messages: {

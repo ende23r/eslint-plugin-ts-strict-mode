@@ -3,7 +3,8 @@ import {
   isNullableType,
   isTypeAnyType,
 } from "@typescript-eslint/type-utils";
-import { hasOnlyExpressionInitializer, Type, TypeChecker } from "typescript";
+import { ParserServicesWithTypeInformation } from "@typescript-eslint/utils";
+import { hasOnlyExpressionInitializer, Type } from "typescript";
 
 /**
  * Compare types such as if object on the left is non nullable and one on the right is then they do not match. It will also check for nested objects.
@@ -15,7 +16,7 @@ import { hasOnlyExpressionInitializer, Type, TypeChecker } from "typescript";
 export function compareTypeObjects(
   left: Type,
   right: Type,
-  checker: TypeChecker,
+  parserServices: ParserServicesWithTypeInformation,
   recursionStack: any[] = []
 ) {
   if (recursionStack.includes(left)) {
@@ -27,8 +28,8 @@ export function compareTypeObjects(
     if (!leftProperty.valueDeclaration) continue;
     if (!hasOnlyExpressionInitializer(leftProperty.valueDeclaration)) continue;
     const leftPropertyType = getConstrainedTypeAtLocation(
-      checker,
-      leftProperty.valueDeclaration.name
+      parserServices as any, // TODO: make these types line up
+      leftProperty.valueDeclaration.name as any, // TODO: switch to new type here
     );
     // if any or nullable on the left then skip
     if (isNullableType(leftPropertyType)) continue;
@@ -47,13 +48,13 @@ export function compareTypeObjects(
     if (!hasOnlyExpressionInitializer(matchingRightProp.valueDeclaration))
       continue;
     const rightPropertyType = getConstrainedTypeAtLocation(
-      checker,
-      matchingRightProp.valueDeclaration.name
+      parserServices as any, // TODO: make these types line up
+      matchingRightProp.valueDeclaration.name as any, // TODO: switch to new type here
     );
 
     if (isNullableType(rightPropertyType)) return false;
     // if (isTypeAnyType(rightPropertyType)) return false;
-    if (!compareTypeObjects(leftPropertyType, rightPropertyType, checker, recursionStack))
+    if (!compareTypeObjects(leftPropertyType, rightPropertyType, parserServices, recursionStack))
       return false;
   }
 
