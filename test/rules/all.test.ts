@@ -1,16 +1,22 @@
-import {
-  RuleTester,
-  InvalidTestCase,
-} from "@typescript-eslint/utils/dist/ts-eslint";
+import { RuleTester, InvalidTestCase } from "@typescript-eslint/rule-tester";
 import path from "path";
-import rule, { MessageIds, RULE_NAME } from "../../src/rules/all";
+import rule, { RULE_NAME } from "../../src/rules/all.js";
+import { afterAll, it, describe } from "vitest";
 
-const root = path.resolve(path.join(__dirname, "../"));
+// TODO: move this to a setupFiles script
+RuleTester.afterAll = afterAll;
+
+// If you are not using vitest with globals: true (https://vitest.dev/config/#globals):
+RuleTester.it = it;
+RuleTester.itOnly = it.only;
+RuleTester.describe = describe;
+
+const root = path.resolve(path.join(__dirname, "../../"));
 
 const ruleTester: RuleTester = new RuleTester({
   parser: require.resolve("@typescript-eslint/parser"),
   parserOptions: {
-    project: "./tsconfig.strict.json",
+    project: "./tsconfig.json",
     tsconfigRootDir: root,
   },
 });

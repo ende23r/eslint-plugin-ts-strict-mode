@@ -6,10 +6,10 @@
   "files": ["dist"],
   "type": "module",
   "scripts": {
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --project tsconfig.json",
     "test": "vitest",
     "clean": "rm -rf dist/*",
-    "build": "tsc && cp src/index.js dist/ && cp package.json dist/",
+    "build": "tsc --project tsconfig.build.json && cp src/index.js dist/ && cp package.json dist/",
     "prepublishOnly": "yarn test && yarn build:win"
   },
   "repository": {
@@ -23,10 +23,12 @@
   "license": "MIT",
   "dependencies": {
     "@typescript-eslint/parser": "^6.19.0",
+    "@typescript-eslint/rule-tester": "6.19",
     "@typescript-eslint/utils": "^6.19.0",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "@types/node": "18.19",
     "eslint": "^8.57.0",
     "typescript-eslint": "^7.13.0",
     "vitest": "^1.6.0"
